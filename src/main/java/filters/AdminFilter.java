@@ -35,6 +35,11 @@ public class AdminFilter implements Filter {
         
         User user = (User)session.getAttribute("user");
         
+        if (user.getRole().getRoleId() == null) {	
+            httpResponse.sendRedirect("login");	
+            return;	
+        }
+        
         if(user.getRole().getRoleId() == 1) {
         chain.doFilter(request, response);
         } else {
